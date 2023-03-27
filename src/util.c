@@ -1,177 +1,73 @@
-#include "../src/util.h"
 #include "stdlib.h"
 #include "malloc.h"
 #include<string.h>
 #include<math.h>
 #include <assert.h>
+#include <stdio.h>
+#include "../src/util.h"
 
 
-// declaration de la liste
-extern Cellule * liste;
+int * createTable(int taille_T){
+    int *p, i;
+    p = (int*)malloc(taille_T*sizeof(int));
 
-//=====================================================//
-//=                       Exercice 1                  =//
-//=====================================================//
+    for(i=0;i<taille_T;i++){
+        printf("Entrez la %d valeur du tableau\n", i);
+        scanf("%d",&p[i]);
+        printf(" p[i] = %d\n", p[i]);
+    }
+    printf("p = %d\n", p);
+    return p; // ici ça retourn le contenu
+}
 
-//=====================================================//
-//=                     Question 1                    =//
-//=====================================================//
+int * concateOrder(int * T1, int taille_T1, int * T2, int taille_T2){
+    int i, j=0, suite=0;
+    int taille_T3 = (taille_T1+taille_T2);
+    int *T3;
+    T3 = (int*)malloc(sizeof(int)*(taille_T3));
+    
 
-void strmycpy(char S[], char T[]) {
-  char *p, *q;
-  p = T; 
-  q = S;
-  while(*p != '\0' ) {
-                       *q = *p;
-                        q++;
-                        p++;
+    for(i=0;i<taille_T1;i++){
+        T3[j]=T1[i];
+        j+=1;
+    }
+
+    for(i=0;i<taille_T2;i++){
+        T3[j]=T2[i];
+        j+=1;
+    }
+
+    printf("T3 avant permutation = [");
+    for(i=0;i<taille_T3;i++){
+        printf("%d, ", T3[i]);
+    }
+    printf("]\n");
+
+    int T;
+    
+    while(1){
+        for(i=0;i<(taille_T3);i++){
+            if(i==(taille_T3-1)){
+                suite=1;
+                break;
             }
-    *q = '\0';
-}
-
-// Exercice 1 Q1
-
-Etudiant initialiseClient(int numero, char nom [], char prenom []) {
-    Etudiant e;
-    e.numero = numero;
-    strmycpy(e.nom, nom);
-    strcpy(e.prenom, prenom);
-    return e;
-}
-
-//=====================================================//
-//=                       Question 3                  =//
-//=====================================================//
-
-void afficheClient(Etudiant e) {
-      printf("L'étudiant %s %s a le numéro %d\n", e.nom, e.prenom, e.numero);
-}
-
-
-//=====================================================//
-//=                       Exercice 2                  =//
-//=====================================================//
-
-//=====================================================//
-//=                        Question 2                 =//
-//=====================================================//
-
-Cellule * initialiseCellule() {
-    Cellule * cell = (Cellule*) malloc(sizeof(Cellule));
-    cell->suivant = NULL;
-    return cell;
-}
-
-//=====================================================//
-//=                        Question 3                 =//
-//=====================================================//
-
-boolean estVide(Cellule * L) {
-
-    if (L == NULL)
-          return true;
-
-    return false;
-}
-
-//=====================================================//
-//=                        Question 4                 =//
-//=====================================================//
-
-Cellule * creerCell(Etudiant e) {
-    Cellule * cell = initialiseCellule();
-    cell->etudiant = e;
-    return cell;
-}
-
-//=====================================================//
-//=                        Question 5                 =//
-//=====================================================//
-
-void ajouterAuDebut(Cellule *c) {
-c->suivant = liste;
-liste = c;
-}
-
-//=====================================================//
-//=                        Question 6                 =//
-//=====================================================//
-
-void ajouterEnFin(Cellule * c) {
-    Cellule * p = liste;
-    while (p->suivant != NULL)
-        p = p->suivant;
-    p->suivant = c;
-}
-
-
-//=====================================================//
-//=                        Question 7                 =//
-//=====================================================//
-
-int nbEtudiants(Cellule * L) {
-    int nbClient = 0;
-    Cellule * p = L;
-    while (p != NULL) {
-          nbClient++;
-          p = p->suivant;
-       }
-
-    return nbClient;
-
+            if(T3[i]>T3[i+1]){
+                T=T3[i];
+                T3[i]=T3[i+1];
+                T3[i+1]=T;
+                break;
+            }
+        }
+        if(suite==1){
+            break;
+        }
     }
 
-//=====================================================//
-//=                        Question 8                 =//
-//=====================================================//
-
-void swap(Cellule *x, Cellule *y) 
-{ 
-    Etudiant temp = x->etudiant; 
-    x->etudiant = y->etudiant; 
-    y->etudiant = temp; 
-}
-
-
-void triListe(Cellule * L) {
-    boolean notDone = true;
-    Cellule * p; 
-
-    while (notDone)
-    {
-         p = L;
-         notDone = false;
-         while (p->suivant != NULL)
-                     {
-                        if(p->etudiant.numero > p->suivant->etudiant.numero) {
-                            swap(p, p->suivant);
-                            notDone = true;
-                        }
-                        p = p->suivant;
-                     }
+    printf("T3 après permutation = [");
+    for(i=0;i<taille_T3;i++){
+        printf("%d, ", T3[i]);
     }
-}
+    printf("]\n");
 
-
-//=====================================================//
-//=                        Extra                     =//
-//=====================================================//
-
-void printCellules(Cellule * L) {
-    Cellule * p = L;
-    while (p != NULL) {
-          afficheClient(p->etudiant);
-          p = p->suivant;
-        }
-
-}
-
-void freeCellules(Cellule * L) {
-    Cellule * p = L;
-    Cellule *q;
-    while (p != NULL) {
-          q = p->suivant;
-          free(p);
-          p = q;
-        }
+    return *T3;
 }

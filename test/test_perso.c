@@ -1,11 +1,17 @@
+#include<stdio.h>
+#include<stdlib.h>
 #include "../test/test_perso.h"
-#include <stdio.h>
-#include "stdlib.h"
 
-struct Etudiant;
+
+extern Etudiant;
 
 
 void main(){
-    struct Etudiant etudiant1 = {"Arthur", 11};
-    printf("nom = %s || numéro = %d\n", etudiant1.nom, etudiant1.numéro);
+
+    int x=4;
+    int* p=&x;
+    int* l = p;
+    *l=5;
+    printf("x = %d, p = %d, l = %d\n", x, p,*l);
+    //x = 5, p = 1596794676, l = 5
 }
