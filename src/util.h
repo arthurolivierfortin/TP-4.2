@@ -27,7 +27,7 @@ struct client{
 typedef struct client Client;
 
 struct celluleclient{
-    Client;
+    Client client;
     int* suivant;
 };
 
