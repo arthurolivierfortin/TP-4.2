@@ -31,7 +31,7 @@ typedef struct client Client;
 
 struct celluleclient{
     Client client;
-    struct celluleclient *suivant = NULL;
+    struct celluleclient *suivant;
 };
 
 typedef struct celluleclient CelluleClient;
@@ -39,7 +39,7 @@ typedef struct celluleclient CelluleClient;
 struct cellulevoiture{
     Voiture voiture;
     Assurance assurance;
-    struct cellulevoiture *suivante = NULL;
+    struct cellulevoiture *suivante;
     struct CelluleClient *propriétaire;
 };
 
@@ -47,3 +47,10 @@ typedef struct cellulevoiture CelluleVoiture;
 
 int* createTable(int taille_T);
 int * concateOrder(int * T1, int taille_T1, int * T2, int taille_T2);
+void strmycpy(char S[], char T[]);
+CelluleClient * createCelluleClient();
+void updateCelluleClient(Client cl, CelluleClient* cell);
+void addCelluleClient(CelluleClient *listeClient, CelluleClient*cell);
+CelluleVoiture * createCelluleVoiture();
+void updateCelluleVoiture(Voiture vr, Assurance as, int client_id, CelluleVoiture* cell, CelluleClient *listeClient);
+void addCelluleVoiture(CelluleVoiture *listeVoiture, CelluleVoiture*cell);

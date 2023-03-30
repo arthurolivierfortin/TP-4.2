@@ -8,13 +8,14 @@
 #define CHECK_EXERCISE2Q10 1
 #define CHECK_EXERCISE2Q11 1
 #define CHECK_EXERCISE2Q13 1
+#define CHECK_EXERCISE2Q14 1
 
 
 
 
 
-extern CelluleClient *listeClient;
-extern CelluleVoiture *listeVoiture;
+CelluleClient *listeClient;
+CelluleVoiture *listeVoiture;
 
 
 
@@ -69,11 +70,14 @@ void main() {
 
                 printf("Il y a %d client dans le dossier, lequel voulez-vous modifier?\n", compte);
                 scanf("%d", &choix);
-                CelluleClient *p =listeClient;
+                p =listeClient;
                 for(i=0;i<(choix-1);i++){
                         p=p->suivant;
                 }
-                CelluleClient *Client2 = updateCelluleClient(client2, p);
+                Client clientH = {8000, 2003, "Fortin", "Arthur-Olivier"};
+                updateCelluleClient(clientH, p);
+                compte=0;
+                choix=0;
 
         }
 
@@ -88,5 +92,33 @@ void main() {
 
         }
 
+        if (CHECK_EXERCISE2Q14) {
+
+                int compte=0, choix = 0, i=0;
+                CelluleVoiture *J =listeVoiture;
+                while(J->suivante!=NULL){
+                        J = J->suivante;
+                        compte+=1;
+                }
+
+                printf("Il y a %d voiture dans le dossier, lequel voulez-vous modifier?\n", compte);
+                scanf("%d", &choix);
+                J =listeVoiture;
+                for(i=0;i<(choix-1);i++){
+                        J=J->suivante;
+                }
+                Client clientH = {8000, 2003, "Fortin", "Arthur-Olivier"};
+                Voiture vr = {4000, 2019, "Honda", "3AE3Q2", "rouge"};
+                Assurance ar = {2000, 2015, "Tout"};
+                updateCelluleVoiture(vr, ar, 80003, J, listeClient);
+                compte=0;
+                choix=0;
+        }
+
+        if (CHECK_EXERCISE2Q11){
+
+                CelluleClient *client2 = createCelluleVoiture();
+                addCelluleVoiture(listeVoiture, client2);
+        }
 
 }

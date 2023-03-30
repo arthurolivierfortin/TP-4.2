@@ -123,7 +123,7 @@ void addCelluleClient(CelluleClient *listeClient, CelluleClient*cell){
     CelluleClient *k=listeClient;
     int c=0, i=0;
 
-    while(p->suivant!=NULL){
+    while(k->suivant!=NULL){
         k=k->suivant;
         c+=1;
     }
@@ -198,7 +198,7 @@ void updateCelluleVoiture(Voiture vr, Assurance as, int client_id, CelluleVoitur
 
 
     for(i=0;i<nbClient;i++){
-        if((p[i]->client.prenom)==cell->propriétaire){
+        if((p[i].client.prenom)==cell->propriétaire){
             trouvé=1;
         }   
     }
@@ -219,10 +219,15 @@ void updateCelluleVoiture(Voiture vr, Assurance as, int client_id, CelluleVoitur
 
 void addCelluleVoiture(CelluleVoiture *listeVoiture, CelluleVoiture*cell){
 
-    CelluleVoiture *newVoiture = (CelluleVoiture*)malloc(sizeof(CelluleVoiture));
+    CelluleClient *k=listeVoiture;
+    int c=0, i=0;
 
-    newVoiture->voiture = cell->voiture;
-    newVoiture->assurance = cell->assurance;
-    newVoiture->suivante = cell->suivante;
-    newVoiture->propriétaire = cell->propriétaire;
+    while(k->suivant!=NULL){
+        k=k->suivant;
+        c+=1;
+    }
+
+    while (k->suivant != NULL)
+        k = k->suivant;
+    k->suivant = cell;
 }
