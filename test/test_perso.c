@@ -8,10 +8,14 @@ extern Etudiant;
 
 void main(){
 
-    int x=4;
-    int* p=&x;
-    int* l = p;
-    *l=5;
-    printf("x = %d, p = %d, l = %d\n", x, p,*l);
-    //x = 5, p = 1596794676, l = 5
+    char x[50];
+    printf("Entrez le nom\n");
+    scanf("%s", x);
+    printf("%d", sizeof(x));
+    printf("\n");
+    printf("%d", strlen(x));
+    printf("\n");
+    printf("%s", x);
+    printf("\n");
+    
 }

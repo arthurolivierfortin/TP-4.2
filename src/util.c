@@ -1,5 +1,4 @@
 #include "stdlib.h"
-#include "malloc.h"
 #include<string.h>
 #include<math.h>
 #include <assert.h>
@@ -70,4 +69,43 @@ int * concateOrder(int * T1, int taille_T1, int * T2, int taille_T2){
     printf("]\n");
 
     return *T3;
+}
+
+void strmycpy(char S[], char T[]) {
+  char *p, *q;
+  p = T; 
+  q = S;
+  while(*p != '\0' ) {
+                       *q = *p;
+                        q++;
+                        p++;
+            }
+    *q = '\0';
+}
+
+CelluleClient * createCelluleClient(){
+    Client client1;
+    char nomClient[50], prenomClient[50];
+    
+    printf("Entrez le nom du client\n");
+    scanf("%s", nomClient);
+
+    printf("Entrez l'id du client\n");
+    scanf("%d", &client1.id);
+
+    printf("Entrez le prenom du client\n");
+    scanf("%s", prenomClient);
+
+    printf("Entrez la date de naissance du client\n");
+    scanf("%d", &client1.dateNaissance);
+
+    strmycpy(client1.nom, nomClient);
+    strmycpy(client1.prenom, prenomClient);
+
+    // Allouer et initialiser une nouvelle cellule client
+    CelluleClient *newCelluleClient = (CelluleClient *)malloc(sizeof(CelluleClient));
+    newCelluleClient->client = client1;
+    newCelluleClient->suivant = NULL;
+    
+    return newCelluleClient;
 }
