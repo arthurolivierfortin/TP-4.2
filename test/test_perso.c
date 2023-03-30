@@ -8,14 +8,23 @@ extern Etudiant;
 
 void main(){
 
-    char x[50];
-    printf("Entrez le nom\n");
-    scanf("%s", x);
-    printf("%d", sizeof(x));
+    struct client{
+        char nom[50];
+    };
+
+    typedef struct client Client;
+
+    Client client1 = {"Arthur"};
+    printf("%s", client1.nom);
     printf("\n");
-    printf("%d", strlen(x));
+
+    char x[] = {"Charles"};
+    strcpy(client1.nom, x);
+
+    printf("%s", client1.nom);
     printf("\n");
-    printf("%s", x);
-    printf("\n");
+
+
     
 }
+

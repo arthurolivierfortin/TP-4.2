@@ -109,3 +109,11 @@ CelluleClient * createCelluleClient(){
     
     return newCelluleClient;
 }
+
+void updateCelluleClient(Client cl, CelluleClient* cell){
+
+    strmycpy(cell.nom,cl.nom);
+    strmycpy(cell.prenom,cl.prenom);
+    strmycpy(cell.id,cl.id);
+    strmycpy(cell.dateNaissance,cl.dateNaissance);
+}
