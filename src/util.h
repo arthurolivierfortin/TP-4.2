@@ -1,3 +1,6 @@
+#include<stdio.h>
+#include<stdlib.h>
+
 enum valide {VRAI, FAUX};
 typedef enum valide Valide;
 
@@ -28,7 +31,7 @@ typedef struct client Client;
 
 struct celluleclient{
     Client client;
-    int* suivant;
+    struct celluleclient *suivant = NULL;
 };
 
 typedef struct celluleclient CelluleClient;
@@ -36,8 +39,8 @@ typedef struct celluleclient CelluleClient;
 struct cellulevoiture{
     Voiture voiture;
     Assurance assurance;
-    int* suivante;
-    int* propriétaire;
+    struct cellulevoiture *suivante = NULL;
+    struct CelluleClient *propriétaire;
 };
 
 typedef struct cellulevoiture CelluleVoiture;

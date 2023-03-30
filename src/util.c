@@ -114,16 +114,24 @@ void updateCelluleClient(Client cl, CelluleClient* cell){
 
     strmycpy(cell->client.nom,cl.nom);
     strmycpy(cell->client.prenom,cl.prenom);
-    strmycpy(cell->client.id,cl.id);
-    strmycpy(cell->client.id,cl.dateNaissance);
+    cell->client.id = cl.id;
+    cell->client.dateNaissance = cl.dateNaissance;
 }
 
 void addCelluleClient(CelluleClient *listeClient, CelluleClient*cell){
 
-    CelluleClient *newClient = (CelluleClient*)malloc(sizeof(CelluleClient));
+    CelluleClient *k=listeClient;
+    int c=0, i=0;
 
-    newClient->client = cell->client;
-    newClient->suivant = cell->suivant;
+    while(p->suivant!=NULL){
+        k=k->suivant;
+        c+=1;
+    }
+
+    while (k->suivant != NULL)
+        k = k->suivant;
+    k->suivant = cell;
+
 }
 
 CelluleVoiture * createCelluleVoiture(){
@@ -173,5 +181,48 @@ CelluleVoiture * createCelluleVoiture(){
 
     nouveauVéhicule->assurance = assurance;
 
+    nouveauVéhicule->propriétaire = createCelluleClient();
+    nouveauVéhicule->suivante = NULL;
+
     return nouveauVéhicule;
+}
+
+void updateCelluleVoiture(Voiture vr, Assurance as, int client_id, CelluleVoiture* cell, CelluleClient *listeClient){
+
+    int nbClient = 0, trouvé=0, i=0;
+    CelluleClient * p = listeClient;
+    while (p != NULL) {
+          nbClient++;
+          p = p->suivant;
+       }
+
+
+    for(i=0;i<nbClient;i++){
+        if((p[i]->client.prenom)==cell->propriétaire){
+            trouvé=1;
+        }   
+    }
+    if(trouvé==0){
+        printf("Erreur : le client ||%s|| n'existe pas", cell->propriétaire);
+        return;
+    }
+
+    cell->voiture = vr;
+    cell->assurance = as;
+    int *propriétaire = cell->propriétaire;
+    Client *clientX = propriétaire;
+    clientX->id = client_id;
+
+
+
+}
+
+void addCelluleVoiture(CelluleVoiture *listeVoiture, CelluleVoiture*cell){
+
+    CelluleVoiture *newVoiture = (CelluleVoiture*)malloc(sizeof(CelluleVoiture));
+
+    newVoiture->voiture = cell->voiture;
+    newVoiture->assurance = cell->assurance;
+    newVoiture->suivante = cell->suivante;
+    newVoiture->propriétaire = cell->propriétaire;
 }

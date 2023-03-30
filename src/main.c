@@ -4,7 +4,10 @@
 
 #define CHECK_EXERCISE1Q1 0
 #define CHECK_EXERCISE1Q2 0
-#define CHECK_EXERCISE2Q8 1
+#define CHECK_EXERCISE2Q9 1
+#define CHECK_EXERCISE2Q10 1
+#define CHECK_EXERCISE2Q11 1
+#define CHECK_EXERCISE2Q13 1
 
 
 
@@ -49,8 +52,39 @@ void main() {
 
         }
 
-        if (CHECK_EXERCISE2Q8) {
+        if (CHECK_EXERCISE2Q9) {
                 listeClient = createCelluleClient();
+                
+                
+        }
+
+        if (CHECK_EXERCISE2Q10) {
+                
+                int compte=0, choix = 0, i=0;
+                CelluleClient *p =listeClient;
+                while(p->suivant!=NULL){
+                        p = p->suivant;
+                        compte+=1;
+                }
+
+                printf("Il y a %d client dans le dossier, lequel voulez-vous modifier?\n", compte);
+                scanf("%d", &choix);
+                CelluleClient *p =listeClient;
+                for(i=0;i<(choix-1);i++){
+                        p=p->suivant;
+                }
+                CelluleClient *Client2 = updateCelluleClient(client2, p);
+
+        }
+
+        if (CHECK_EXERCISE2Q11){
+
+                CelluleClient *client2 = createCelluleClient();
+                addCelluleClient(listeClient, client2);
+        }
+
+        if (CHECK_EXERCISE2Q13) {
+                listeVoiture = createCelluleVoiture();
 
         }
 
