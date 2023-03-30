@@ -34,8 +34,8 @@ struct celluleclient{
 typedef struct celluleclient CelluleClient;
 
 struct cellulevoiture{
-    Voiture;
-    Assurance;
+    Voiture voiture;
+    Assurance assurance;
     int* suivante;
     int* propriétaire;
 };

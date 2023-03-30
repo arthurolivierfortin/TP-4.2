@@ -112,8 +112,66 @@ CelluleClient * createCelluleClient(){
 
 void updateCelluleClient(Client cl, CelluleClient* cell){
 
-    strmycpy(cell.nom,cl.nom);
-    strmycpy(cell.prenom,cl.prenom);
-    strmycpy(cell.id,cl.id);
-    strmycpy(cell.dateNaissance,cl.dateNaissance);
+    strmycpy(cell->client.nom,cl.nom);
+    strmycpy(cell->client.prenom,cl.prenom);
+    strmycpy(cell->client.id,cl.id);
+    strmycpy(cell->client.id,cl.dateNaissance);
+}
+
+void addCelluleClient(CelluleClient *listeClient, CelluleClient*cell){
+
+    CelluleClient *newClient = (CelluleClient*)malloc(sizeof(CelluleClient));
+
+    newClient->client = cell->client;
+    newClient->suivant = cell->suivant;
+}
+
+CelluleVoiture * createCelluleVoiture(){
+
+    Voiture véhicule;
+    Assurance assurance;
+
+    char marque[80], numeroMatricule[80], couleur[80];
+
+    printf("Entrez l'id de la voiture\n");
+    scanf("%d", &véhicule.id);
+
+    printf("Entrez la date de fabrication de la voiture\n");
+    scanf("%d", &véhicule.dateFabrication);
+
+    printf("Entrez la marque de la voiture\n");
+    scanf("%s", marque);
+
+    printf("Entrez le numero de matricule de la voiture\n");
+    scanf("%s", numeroMatricule);
+
+    printf("Entrez la couleur de la voiture\n");
+    scanf("%s", couleur);
+
+    strmycpy(véhicule.Marque, marque);
+
+    strmycpy(véhicule.numeroMatricule, numeroMatricule);
+
+    strmycpy(véhicule.Couleur, couleur);
+
+    CelluleVoiture *nouveauVéhicule = (CelluleVoiture*)malloc(sizeof(CelluleVoiture));
+
+    nouveauVéhicule->voiture = véhicule;
+
+    int type[80];
+
+    printf("Entrez la date de début de votre assurance\n");
+    scanf("%d", &assurance.dateDebut);
+
+    printf("Entrez la date de fin de votre assurance\n");
+    scanf("%d", &assurance.dateFin);
+
+    printf("Entrez la date de début de votre assurance\n");
+    scanf("%s", type);
+
+    strmycpy(assurance.type, type);
+
+    nouveauVéhicule->assurance = assurance;
+
+    return nouveauVéhicule;
 }
